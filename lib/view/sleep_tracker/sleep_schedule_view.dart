@@ -1,5 +1,5 @@
 import 'package:calendar_agenda/calendar_agenda.dart';
-import 'package:fl_chart/fl_chart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:gym_project/common/color_extension.dart';
 import 'package:gym_project/view/sleep_tracker/sleep_add_alarm_view.dart';
@@ -37,12 +37,11 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
 
   List<int> showingTooltipOnSpots = [4];
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _selectedDateAppBBar=DateTime.now();
-  // }
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _selectedDateAppBBar = DateTime.now();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +72,7 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
           ),
         ),
         title: Text(
-          "Sleep Tracker",
+          "Sleep Schedule",
           style: TextStyle(
               color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
         ),
@@ -103,17 +102,15 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: media.width * 0.05,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(15),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: Container(
                     width: double.maxFinite,
+                    padding: const EdgeInsets.all(20),
                     height: media.width * 0.4,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(colors: [
@@ -138,7 +135,7 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
                                 ),
                               ),
                               Text(
-                                "8hours 20minutes",
+                                "8hours 30minutes",
                                 style: TextStyle(
                                     color: TColor.primaryColor2,
                                     fontSize: 16,
@@ -146,12 +143,11 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
                               ),
                               const Spacer(),
                               SizedBox(
-                                width: 100,
+                                width: 110,
                                 height: 35,
                                 child: RoundButton(
                                     title: "Learn More",
-                                    fontsize: 12,
-                                    fontWeight: FontWeight.w500,
+                                    // fontSize: 12,
                                     onPressed: () {}),
                               )
                             ]),
@@ -162,88 +158,91 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: media.width * 0.05,
-                  ),
-                  Text(
+                ),
+                SizedBox(
+                  height: media.width * 0.05,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: Text(
                     "Your Schedule",
                     style: TextStyle(
                         color: TColor.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w700),
                   ),
-                  CalendarAgenda(
-                    controller: _calendarAgendaControllerAppBar,
-                    appbar: false,
-                    selectedDayPosition: SelectedDayPosition.center,
-                    leading: IconButton(
-                        onPressed: () {},
-                        icon: Image.asset(
-                          "assets/img/ArrowLeft.png",
-                          width: 15,
-                          height: 15,
-                        )),
-                    training: IconButton(
-                        onPressed: () {},
-                        icon: Image.asset(
-                          "assets/img/ArrowRight.png",
-                          width: 15,
-                          height: 15,
-                        )),
-                    weekDay: WeekDay.short,
-                    dayNameFontSize: 12,
-                    dayNumberFontSize: 16,
-                    dayBGColor: Colors.grey.withOpacity(0.15),
-                    titleSpaceBetween: 15,
-                    backgroundColor: Colors.transparent,
-                    // fullCalendar: false,
-                    fullCalendarScroll: FullCalendarScroll.horizontal,
-                    fullCalendarDay: WeekDay.short,
-                    selectedDateColor: Colors.white,
-                    dateColor: Colors.black,
-                    locale: 'en',
+                ),
+                CalendarAgenda(
+                  controller: _calendarAgendaControllerAppBar,
+                  appbar: false,
+                  selectedDayPosition: SelectedDayPosition.center,
+                  leading: IconButton(
+                      onPressed: () {},
+                      icon: Image.asset(
+                        "assets/img/ArrowLeft.png",
+                        width: 15,
+                        height: 15,
+                      )),
+                  training: IconButton(
+                      onPressed: () {},
+                      icon: Image.asset(
+                        "assets/img/ArrowRight.png",
+                        width: 15,
+                        height: 15,
+                      )),
+                  weekDay: WeekDay.short,
+                  dayNameFontSize: 12,
+                  dayNumberFontSize: 16,
+                  dayBGColor: Colors.grey.withOpacity(0.15),
+                  titleSpaceBetween: 15,
+                  backgroundColor: Colors.transparent,
+                  // fullCalendar: false,
+                  fullCalendarScroll: FullCalendarScroll.horizontal,
+                  fullCalendarDay: WeekDay.short,
+                  selectedDateColor: Colors.white,
+                  dateColor: Colors.black,
+                  locale: 'en',
 
-                    initialDate: DateTime.now(),
-                    calendarEventColor: TColor.primaryColor2,
-                    firstDate:
-                        DateTime.now().subtract(const Duration(days: 140)),
-                    lastDate: DateTime.now().add(const Duration(days: 60)),
+                  initialDate: DateTime.now(),
+                  calendarEventColor: TColor.primaryColor2,
+                  firstDate: DateTime.now().subtract(const Duration(days: 140)),
+                  lastDate: DateTime.now().add(const Duration(days: 60)),
 
-                    onDateSelected: (date) {
-                      _selectedDateAppBBar = date;
-                      // setDayEventWorkoutList();
-                    },
-                    selectedDayLogo: Container(
-                      width: double.maxFinite,
-                      height: double.maxFinite,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: TColor.primaryG,
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
+                  onDateSelected: (date) {
+                    _selectedDateAppBBar = date;
+                  },
+                  selectedDayLogo: Container(
+                    width: double.maxFinite,
+                    height: double.maxFinite,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: TColor.primaryG,
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  SizedBox(
-                    height: media.width * 0.03,
-                  ),
-                  ListView.builder(
-                      padding: EdgeInsets.zero,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: todaySleepArr.length,
-                      itemBuilder: (context, index) {
-                        var sObj = todaySleepArr[index] as Map? ?? {};
-                        return TodaySleepScheduleRow(
-                          sObj: sObj,
-                        );
-                      }),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
+                ),
+                SizedBox(
+                  height: media.width * 0.03,
+                ),
+                ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: todaySleepArr.length,
+                    itemBuilder: (context, index) {
+                      var sObj = todaySleepArr[index] as Map? ?? {};
+                      return TodaySleepScheduleRow(
+                        sObj: sObj,
+                      );
+                    }),
+                Container(
                     width: double.maxFinite,
-                    // height: media.width * 0.4,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         gradient: LinearGradient(colors: [
                           TColor.secondaryColor2.withOpacity(0.4),
@@ -253,9 +252,6 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 10,
-                        ),
                         Text(
                           "You will get 8hours 10minutes\nfor tonight",
                           style: TextStyle(
@@ -263,7 +259,7 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
                             fontSize: 12,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Stack(
@@ -274,7 +270,6 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
                               width: media.width - 80,
                               backgroundColor: Colors.grey.shade100,
                               foregrondColor: Colors.purple,
-                              // ratio: wObj["progress"] as double? ?? 0.0,
                               ratio: 0.96,
                               direction: Axis.horizontal,
                               curve: Curves.fastLinearToSlowEaseIn,
@@ -295,10 +290,8 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
                           ],
                         ),
                       ],
-                    ),
-                  )
-                ],
-              ),
+                    )),
+              ],
             ),
             SizedBox(
               height: media.width * 0.05,
@@ -309,11 +302,13 @@ class _SleepScheduleViewState extends State<SleepScheduleView> {
       floatingActionButton: InkWell(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SleepAddAlarmView(
-                        date: _selectedDateAppBBar,
-                      )));
+            context,
+            MaterialPageRoute(
+              builder: (context) => SleepAddAlarmView(
+                date: _selectedDateAppBBar,
+              ),
+            ),
+          );
         },
         child: Container(
           width: 55,
